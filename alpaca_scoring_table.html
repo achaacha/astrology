@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Table of Strengths & Debilities</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0e12;
+  --surface: #16161c;
+  --surface2: #1c1c24;
+  --border: #2a2a36;
+  --text: #d4d0c8;
+  --text-dim: #7a7770;
+  --text-bright: #ede8df;
+  --gold: #c4a44e;
+  --gold-dim: #8a7535;
+  --positive: #5a9e6f;
+  --negative: #b85450;
+  --neutral: #5a6a8a;
+  --accent: #7a6a52;
+  --sun: #d4a82e;
+  --moon: #b0b8c8;
+  --mercury: #7aa87a;
+  --venus: #c87a8a;
+  --mars: #c85a4a;
+  --jupiter: #5a8ac8;
+  --saturn: #8a7a6a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Cormorant Garamond', serif;
+  line-height: 1.5;
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 1px solid var(--gold-dim);
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+header .subtitle {
+  font-size: 1rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+header .chart-info {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-top: 1rem;
+  line-height: 1.8;
+}
+
+.note-box {
+  background: var(--surface);
+  border-left: 3px solid var(--gold-dim);
+  padding: 0.8rem 1rem;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.note-box strong { color: var(--gold); }
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 2rem 0 0.8rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Table styles */
+.scoring-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin-bottom: 1.5rem;
+}
+
+.scoring-table th,
+.scoring-table td {
+  padding: 0.4rem 0.5rem;
+  text-align: center;
+  border: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.scoring-table th {
+  background: var(--surface2);
+  font-weight: 600;
+  color: var(--text-bright);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+}
+
+.scoring-table th.planet-header {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.5rem;
+}
+
+.scoring-table th.planet-header .symbol {
+  display: block;
+  font-family: serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.15rem;
+}
+
+.scoring-table td.category {
+  text-align: left;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface);
+  padding-left: 0.8rem;
+  white-space: nowrap;
+  font-size: 0.78rem;
+}
+
+.scoring-table td.subcategory {
+  text-align: left;
+  padding-left: 1.4rem;
+  color: var(--text-dim);
+  background: var(--surface);
+  font-size: 0.76rem;
+}
+
+.scoring-table .section-header {
+  background: var(--surface2);
+  font-weight: 700;
+  color: var(--gold);
+  text-align: left;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+}
+
+.scoring-table .subtotal-row td {
+  background: var(--surface2);
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  border-top: 2px solid var(--border);
+}
+
+.scoring-table .grand-total td {
+  background: #1a1a22;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+  border-top: 3px double var(--gold-dim);
+  color: var(--text-bright);
+  padding: 0.6rem 0.5rem;
+}
+
+/* Score coloring */
+.pos { color: var(--positive); }
+.neg { color: var(--negative); }
+.zero { color: var(--text-dim); }
+.na { color: var(--text-dim); font-style: italic; font-size: 0.7rem; }
+
+/* Planet column tints */
+.col-sun { border-bottom-color: var(--sun) !important; }
+.col-moon { border-bottom-color: var(--moon) !important; }
+
+/* Footnotes */
+.footnotes {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.footnotes p {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin-bottom: 0.4rem;
+  line-height: 1.6;
+}
+
+.footnotes sup { color: var(--gold); font-weight: 600; }
+
+/* Interpretation */
+.interpretation {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  margin-top: 2rem;
+  line-height: 1.7;
+}
+
+.interpretation h3 {
+  color: var(--gold);
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+.interpretation p {
+  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+}
+
+.rank-list {
+  list-style: none;
+  margin: 0.8rem 0;
+  padding: 0;
+}
+
+.rank-list li {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  padding: 0.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rank-list .rank { color: var(--text-dim); width: 1.5rem; }
+.rank-list .score { width: 3rem; font-weight: 600; }
+
+.bar-container {
+  flex: 1;
+  height: 10px;
+  background: var(--surface2);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+.bar.positive { background: var(--positive); }
+.bar.negative { background: var(--negative); right: 0; position: absolute; }
+
+@media (max-width: 800px) {
+  .scoring-table { font-size: 0.7rem; }
+  .scoring-table th, .scoring-table td { padding: 0.3rem; }
+  .scoring-table td.subcategory { padding-left: 0.8rem; }
+  header h1 { font-size: 1.3rem; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Table of Strengths &amp; Debilities</h1>
+  <div class="subtitle">After the method of Avelar &amp; Ribeiro, <em>On the Heavenly Spheres</em></div>
+  <div class="chart-info">
+    30 August 1991 &nbsp;·&nbsp; Day Chart (☉ above horizon)<br>
+    ASC Sag 23°08' &nbsp;·&nbsp; MC Lib 11°57'<br>
+    Positions: Sidereal (Lahiri, ayanamsa ≈ 23°44')
+  </div>
+</header>
+
+<div class="note-box">
+  <strong>Zodiac note:</strong> The positions supplied are sidereal (Lahiri). Computed tropical positions for this date differ by ~23°44'. Essential dignities below are scored against the sidereal positions as given. If you intend tropical scoring, the essential dignities would change significantly (e.g., Sun would fall in Virgo, not Leo). Accidental dignities are largely zodiac-independent.
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- MAIN SCORING TABLE                          -->
+<!-- ═══════════════════════════════════════════ -->
+
+<table class="scoring-table">
+<colgroup>
+  <col style="width:22%">
+  <col style="width:10%"><col style="width:10%"><col style="width:10%">
+  <col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:10%">
+  <col style="width:8%">
+</colgroup>
+<thead>
+<tr>
+  <th></th>
+  <th class="planet-header"><span class="symbol">☉</span>Sun<br><span style="font-size:0.65rem;color:var(--text-dim)">Leo 13°16'<br>H8</span></th>
+  <th class="planet-header"><span class="symbol">☽</span>Moon<br><span style="font-size:0.65rem;color:var(--text-dim)">Ari 19°30'<br>H4</span></th>
+  <th class="planet-header"><span class="symbol">☿</span>Mercury<br><span style="font-size:0.65rem;color:var(--text-dim)">Can 29°20' R<br>H8*</span></th>
+  <th class="planet-header"><span class="symbol">♀</span>Venus<br><span style="font-size:0.65rem;color:var(--text-dim)">Leo 0°48' R<br>H8*</span></th>
+  <th class="planet-header"><span class="symbol">♂</span>Mars<br><span style="font-size:0.65rem;color:var(--text-dim)">Vir 5°22'<br>H8</span></th>
+  <th class="planet-header"><span class="symbol">♃</span>Jupiter<br><span style="font-size:0.65rem;color:var(--text-dim)">Leo 3°35'<br>H8</span></th>
+  <th class="planet-header"><span class="symbol">♄</span>Saturn<br><span style="font-size:0.65rem;color:var(--text-dim)">Cap 7°25' R<br>H1</span></th>
+  <th style="font-size:0.65rem">Pts<br>Available</th>
+</tr>
+</thead>
+<tbody>
+
+<!-- ESSENTIAL DIGNITIES -->
+<tr><td colspan="9" class="section-header">PART 1 · ESSENTIAL DIGNITIES</td></tr>
+
+<tr>
+  <td class="subcategory">Rulership</td>
+  <td class="pos">+5</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="pos">+5</td>
+  <td class="na">+5</td>
+</tr>
+<tr>
+  <td class="subcategory">Exaltation</td>
+  <td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td>
+  <td class="na">+4</td>
+</tr>
+<tr>
+  <td class="subcategory">Triplicity (day ruler)</td>
+  <td class="pos">+3</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td>
+  <td class="na">+3</td>
+</tr>
+<tr>
+  <td class="subcategory">Term (Egyptian)</td>
+  <td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="pos">+2</td><td class="zero">—</td>
+  <td class="na">+2</td>
+</tr>
+<tr>
+  <td class="subcategory">Face (decan)</td>
+  <td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td>
+  <td class="na">+1</td>
+</tr>
+<tr>
+  <td class="subcategory">Detriment</td>
+  <td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td>
+  <td class="na">−5</td>
+</tr>
+<tr>
+  <td class="subcategory">Fall</td>
+  <td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td>
+  <td class="na">−4</td>
+</tr>
+
+<tr class="subtotal-row">
+  <td class="category">Essential Subtotal</td>
+  <td class="pos">+8</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="pos">+2</td><td class="pos">+5</td>
+  <td></td>
+</tr>
+
+<!-- PEREGRINE & MUTUAL RECEPTION -->
+<tr><td colspan="9" class="section-header">PEREGRINE &amp; MUTUAL RECEPTION</td></tr>
+
+<tr>
+  <td class="subcategory">Peregrine (−5 if no dignity)</td>
+  <td class="na">—</td><td class="neg">−5</td><td class="neg">−5</td><td class="neg">−5</td><td class="neg">−5</td><td class="na">—</td><td class="na">—</td>
+  <td class="na">−5</td>
+</tr>
+<tr>
+  <td class="subcategory">Mutual reception</td>
+  <td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td>
+  <td class="na">+5/+4</td>
+</tr>
+
+<tr class="subtotal-row">
+  <td class="category">Adjusted Essential Total</td>
+  <td class="pos">+8</td><td class="neg">−5</td><td class="neg">−5</td><td class="neg">−5</td><td class="neg">−5</td><td class="pos">+2</td><td class="pos">+5</td>
+  <td></td>
+</tr>
+
+<!-- ACCIDENTAL DIGNITIES -->
+<tr><td colspan="9" class="section-header">PART 2 · ACCIDENTAL DIGNITIES</td></tr>
+
+<!-- 2A: House -->
+<tr><td colspan="9" class="section-header" style="font-size:0.72rem; color:var(--text-dim); padding-left:1.2rem;">2A · Position by House</td></tr>
+<tr>
+  <td class="subcategory">Angularity</td>
+  <td class="neg">−4 <sup style="color:var(--text-dim);font-size:0.6rem">H8</sup></td>
+  <td class="pos">+4 <sup style="color:var(--text-dim);font-size:0.6rem">H4</sup></td>
+  <td class="neg">−4 <sup style="color:var(--text-dim);font-size:0.6rem">H8*</sup></td>
+  <td class="neg">−4 <sup style="color:var(--text-dim);font-size:0.6rem">H8*</sup></td>
+  <td class="neg">−4 <sup style="color:var(--text-dim);font-size:0.6rem">H8</sup></td>
+  <td class="neg">−4 <sup style="color:var(--text-dim);font-size:0.6rem">H8</sup></td>
+  <td class="pos">+5 <sup style="color:var(--text-dim);font-size:0.6rem">H1</sup></td>
+  <td class="na">±5</td>
+</tr>
+<tr>
+  <td class="subcategory">Joy by house</td>
+  <td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td>
+  <td class="na">+2</td>
+</tr>
+
+<!-- 2B: Sun relationship -->
+<tr><td colspan="9" class="section-header" style="font-size:0.72rem; color:var(--text-dim); padding-left:1.2rem;">2B · Relationship to the Sun</td></tr>
+<tr>
+  <td class="subcategory">Combustion / Beams / Free <sup>1</sup></td>
+  <td class="na">N/A</td>
+  <td class="pos">+5 <sup style="color:var(--text-dim);font-size:0.6rem">free</sup></td>
+  <td class="neg">−4 <sup style="color:var(--text-dim);font-size:0.6rem">beams</sup></td>
+  <td class="neg">−4 <sup style="color:var(--text-dim);font-size:0.6rem">beams</sup></td>
+  <td class="pos">+5 <sup style="color:var(--text-dim);font-size:0.6rem">free</sup></td>
+  <td class="neg">−4 <sup style="color:var(--text-dim);font-size:0.6rem">beams</sup></td>
+  <td class="pos">+5 <sup style="color:var(--text-dim);font-size:0.6rem">free</sup></td>
+  <td class="na">±6</td>
+</tr>
+<tr>
+  <td class="subcategory">Increasing / decreasing light</td>
+  <td class="na">N/A</td>
+  <td class="pos">+1 <sup style="color:var(--text-dim);font-size:0.6rem">waxing</sup></td>
+  <td class="neg">−1 <sup style="color:var(--text-dim);font-size:0.6rem">→inf.conj</sup></td>
+  <td class="neg">−1 <sup style="color:var(--text-dim);font-size:0.6rem">→inf.conj</sup></td>
+  <td class="pos">+1 <sup style="color:var(--text-dim);font-size:0.6rem">sep.☉</sup></td>
+  <td class="pos">+1 <sup style="color:var(--text-dim);font-size:0.6rem">sep.☉</sup></td>
+  <td class="pos">+1 <sup style="color:var(--text-dim);font-size:0.6rem">→opp</sup></td>
+  <td class="na">±1</td>
+</tr>
+<tr>
+  <td class="subcategory">Orientality / occidentality <sup>2</sup></td>
+  <td class="na">N/A</td>
+  <td class="neg">−2 <sup style="color:var(--text-dim);font-size:0.6rem">ori/noct</sup></td>
+  <td class="neg">−2 <sup style="color:var(--text-dim);font-size:0.6rem">ori/inf</sup></td>
+  <td class="neg">−2 <sup style="color:var(--text-dim);font-size:0.6rem">ori/noct</sup></td>
+  <td class="neg">−2 <sup style="color:var(--text-dim);font-size:0.6rem">occ/sup</sup></td>
+  <td class="pos">+2 <sup style="color:var(--text-dim);font-size:0.6rem">ori/sup</sup></td>
+  <td class="neg">−2 <sup style="color:var(--text-dim);font-size:0.6rem">occ/sup</sup></td>
+  <td class="na">±2</td>
+</tr>
+
+<!-- 2C: Motion -->
+<tr><td colspan="9" class="section-header" style="font-size:0.72rem; color:var(--text-dim); padding-left:1.2rem;">2C · Motion</td></tr>
+<tr>
+  <td class="subcategory">Direction (D / R)</td>
+  <td class="na">N/A</td><td class="na">N/A</td>
+  <td class="neg">−5 <sup style="color:var(--text-dim);font-size:0.6rem">R</sup></td>
+  <td class="neg">−5 <sup style="color:var(--text-dim);font-size:0.6rem">R</sup></td>
+  <td class="pos">+4 <sup style="color:var(--text-dim);font-size:0.6rem">D</sup></td>
+  <td class="pos">+4 <sup style="color:var(--text-dim);font-size:0.6rem">D</sup></td>
+  <td class="neg">−5 <sup style="color:var(--text-dim);font-size:0.6rem">R</sup></td>
+  <td class="na">+4/−5</td>
+</tr>
+<tr>
+  <td class="subcategory">Velocity <sup>3</sup></td>
+  <td class="zero">0 <sup style="color:var(--text-dim);font-size:0.6rem">98%</sup></td>
+  <td class="pos">+2 <sup style="color:var(--text-dim);font-size:0.6rem">103%</sup></td>
+  <td class="neg">−2 <sup style="color:var(--text-dim);font-size:0.6rem">6%</sup></td>
+  <td class="neg">−2 <sup style="color:var(--text-dim);font-size:0.6rem">42%</sup></td>
+  <td class="pos">+2 <sup style="color:var(--text-dim);font-size:0.6rem">123%</sup></td>
+  <td class="pos">+2 <sup style="color:var(--text-dim);font-size:0.6rem">261%</sup></td>
+  <td class="pos">+2 <sup style="color:var(--text-dim);font-size:0.6rem">157%</sup></td>
+  <td class="na">±2</td>
+</tr>
+
+<!-- 2D: Aspects -->
+<tr><td colspan="9" class="section-header" style="font-size:0.72rem; color:var(--text-dim); padding-left:1.2rem;">2D · Aspects</td></tr>
+<tr>
+  <td class="subcategory">Conj / △ / ✶ benefic <sup>4</sup></td>
+  <td class="zero">—</td><td class="zero">—</td>
+  <td class="pos">+10 <sup style="color:var(--text-dim);font-size:0.6rem">☿☌♀ ☿☌♃</sup></td>
+  <td class="pos">+5 <sup style="color:var(--text-dim);font-size:0.6rem">♀☌♃</sup></td>
+  <td class="zero">—</td>
+  <td class="pos">+5 <sup style="color:var(--text-dim);font-size:0.6rem">♃☌♀</sup></td>
+  <td class="zero">—</td>
+  <td class="na">+5 ea.</td>
+</tr>
+<tr>
+  <td class="subcategory">Conj / ☍ / □ malefic</td>
+  <td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td>
+  <td class="na">−5 ea.</td>
+</tr>
+<tr>
+  <td class="subcategory">Assisted / besieged</td>
+  <td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td>
+  <td class="na">±5</td>
+</tr>
+<tr>
+  <td class="subcategory">Void of course / feral <sup>5</sup></td>
+  <td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td>
+  <td class="na">−2/−3</td>
+</tr>
+
+<!-- 2E: Conformity -->
+<tr><td colspan="9" class="section-header" style="font-size:0.72rem; color:var(--text-dim); padding-left:1.2rem;">2E · Conformity</td></tr>
+<tr>
+  <td class="subcategory">Hayz / contrary <sup>6</sup></td>
+  <td class="pos">+3</td>
+  <td class="zero">0</td>
+  <td class="zero">0</td>
+  <td class="neg">−2</td>
+  <td class="zero">0</td>
+  <td class="pos">+3</td>
+  <td class="neg">−2</td>
+  <td class="na">+3/−2</td>
+</tr>
+<tr>
+  <td class="subcategory">Joy by sign</td>
+  <td class="pos">+3 <sup style="color:var(--text-dim);font-size:0.6rem">☉ in ♌</sup></td>
+  <td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td>
+  <td class="na">+3</td>
+</tr>
+
+<!-- 2F: Nodes -->
+<tr><td colspan="9" class="section-header" style="font-size:0.72rem; color:var(--text-dim); padding-left:1.2rem;">2F · Lunar Nodes</td></tr>
+<tr>
+  <td class="subcategory">Conj. North / South Node</td>
+  <td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td>
+  <td class="na">−3/−5</td>
+</tr>
+
+<!-- 2G: Lunar -->
+<tr><td colspan="9" class="section-header" style="font-size:0.72rem; color:var(--text-dim); padding-left:1.2rem;">2G · Lunar Conditions</td></tr>
+<tr>
+  <td class="subcategory">Via combusta / Gemini / eclipsed</td>
+  <td class="na">N/A</td>
+  <td class="zero">—</td>
+  <td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td>
+  <td class="na">−2/−5</td>
+</tr>
+
+<!-- 2H: Fixed Stars -->
+<tr><td colspan="9" class="section-header" style="font-size:0.72rem; color:var(--text-dim); padding-left:1.2rem;">2H · Fixed Stars (1991 epoch)</td></tr>
+<tr>
+  <td class="subcategory">Conj. benefic / malefic star <sup>7</sup></td>
+  <td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td><td class="zero">—</td>
+  <td class="na">±5</td>
+</tr>
+
+<!-- ACCIDENTAL SUBTOTAL -->
+<tr class="subtotal-row">
+  <td class="category">Accidental Subtotal</td>
+  <td class="pos">+2</td>
+  <td class="pos">+10</td>
+  <td class="neg">−8</td>
+  <td class="neg">−15</td>
+  <td class="pos">+6</td>
+  <td class="pos">+9</td>
+  <td class="pos">+4</td>
+  <td></td>
+</tr>
+
+<!-- GRAND TOTAL -->
+<tr class="grand-total">
+  <td class="category" style="color:var(--gold)">GRAND TOTAL</td>
+  <td class="pos">+10</td>
+  <td class="pos">+5</td>
+  <td class="neg">−13</td>
+  <td class="neg">−20</td>
+  <td class="pos">+1</td>
+  <td class="pos">+11</td>
+  <td class="pos">+9</td>
+  <td></td>
+</tr>
+
+</tbody>
+</table>
+
+<!-- FOOTNOTES -->
+<div class="footnotes">
+  <p><sup>1</sup> <strong>Sun distances:</strong> Moon 114° (free) · Mercury 13°56' (under beams) · Venus 12°28' (under beams) · Mars 22° (free) · Jupiter 9°41' (under beams) · Saturn 144° (free). Not cumulative — each planet receives only one score.</p>
+  <p><sup>2</sup> <strong>Orientality:</strong> Mercury classified as inferior/feminine per user specification (Rx near Sun). Superior planets (♃ ♂ ♄) prefer oriental; inferior planets (♀ ☽; ☿ here) prefer occidental.</p>
+  <p><sup>3</sup> <strong>Velocity (% of mean daily motion):</strong> ☉ 0.967°/0.986° (98%) · ☽ 13.57°/13.18° (103%) · ☿ 0.083°/1.383° (6%) · ♀ 0.501°/1.200° (42%) · ♂ 0.642°/0.524° (123%) · ♃ 0.217°/0.083° (261%) · ♄ 0.053°/0.034° (157%). Sun scored 0 (marginal at 98% — practitioner's discretion; strict reading = −2, which would reduce Sun total to +8).</p>
+  <p><sup>4</sup> <strong>Benefic aspects:</strong> ☿☌♀ = 1°28' (across Can/Leo boundary — very tight, scored as conjunction). ☿☌♃ = 4°15'. ♀☌♃ = 2°47'. All three fall within the 8th-house stellium. ♃ receives ♀ conjunction and vice versa.</p>
+  <p><sup>5</sup> <strong>Void / feral:</strong> Not fully calculable without complete ephemeris sweep. No planet scored. The Moon at Ari 19°30' likely applies a square to the Mercury/Venus/Jupiter cluster before leaving Aries, so probably not void.</p>
+  <p><sup>6</sup> <strong>Hayz:</strong> ☉ — diurnal, day, above horizon (H8), masculine sign (Leo) ✓ full hayz. ♃ — diurnal, day, above horizon (H8), masculine sign (Leo) ✓ full hayz. ♀ — nocturnal, day, above horizon (H8), masculine sign (Leo) — fully contrary. ♄ — diurnal, day, below horizon (H1), feminine sign (Cap) — fully contrary. Moon, Mars, Mercury — mixed conditions, scored 0. *Mercury and Venus placed in H8 by 5° cusp rule (♀ 0°59' from cusp, ☿ 2°27').</p>
+  <p><sup>7</sup> <strong>Fixed stars:</strong> No traditional planet falls within 1° of a 1st/2nd magnitude star at this epoch (sidereal positions checked). Notable near-miss: North Node at Sag 22°34' is within 1° of Vega (benefic, Sag 21°35' sid.) — not scored in the planet table but relevant to your temperament note about the Node supplying moisture.</p>
+</div>
+
+<!-- INTERPRETATION -->
+<div class="interpretation">
+  <h3>Interpretive Summary</h3>
+
+  <p style="margin-bottom:1rem; color:var(--text-dim); font-style:italic;">Ranking by grand total:</p>
+
+  <ul class="rank-list">
+    <li><span class="rank">1.</span> <span style="width:5rem">♃ Jupiter</span> <span class="score pos">+11</span> <span class="bar-container"><span class="bar positive" style="width:35%"></span></span></li>
+    <li><span class="rank">2.</span> <span style="width:5rem">☉ Sun</span> <span class="score pos">+10</span> <span class="bar-container"><span class="bar positive" style="width:32%"></span></span></li>
+    <li><span class="rank">3.</span> <span style="width:5rem">♄ Saturn</span> <span class="score pos">+9</span> <span class="bar-container"><span class="bar positive" style="width:29%"></span></span></li>
+    <li><span class="rank">4.</span> <span style="width:5rem">☽ Moon</span> <span class="score pos">+5</span> <span class="bar-container"><span class="bar positive" style="width:16%"></span></span></li>
+    <li><span class="rank">5.</span> <span style="width:5rem">♂ Mars</span> <span class="score pos">+1</span> <span class="bar-container"><span class="bar positive" style="width:3%"></span></span></li>
+    <li><span class="rank">6.</span> <span style="width:5rem">☿ Mercury</span> <span class="score neg">−13</span> <span class="bar-container"><span class="bar negative" style="width:42%; left:auto; right:50%"></span></span></li>
+    <li><span class="rank">7.</span> <span style="width:5rem">♀ Venus</span> <span class="score neg">−20</span> <span class="bar-container"><span class="bar negative" style="width:65%; left:auto; right:50%"></span></span></li>
+  </ul>
+
+  <p style="margin-top:1.5rem;"><strong style="color:var(--gold)">Jupiter</strong> emerges as the chart's strongest planet despite occupying the cadent 8th house and falling under the Sun's beams. Its strength is almost entirely accidental: direct and extraordinarily fast motion (261% of mean), oriental, in full hayz, and tightly conjunct Venus. Its essential dignity is modest — only term — which creates an interpretive tension: Jupiter acts powerfully and visibly, but its promise is limited to the minor dignity of term. A capable operator with only modest credentials.</p>
+
+  <p><strong style="color:var(--gold)">The Sun</strong> is the only planet with substantial essential dignity (+8 from domicile and triplicity), anchoring its authority in genuine quality. Its accidental score is modest (+2), dragged down by the 8th house. This is a competent figure in a difficult circumstance — the Sun's quality is impeccable, but the 8th house limits its visibility and sphere of action.</p>
+
+  <p><strong style="color:var(--gold)">Saturn</strong> holds domicile dignity (+5) and sits on the Ascendant — the most prominent accidental position. However, retrograde motion and contrariety to hayz erode the accidental gains. Saturn is essentially sound and accidentally placed to be noticed, but hampered in execution.</p>
+
+  <p><strong style="color:var(--gold)">The Moon</strong> is the chart's most interesting case of the essential–accidental split. Peregrine (−5 essential), the Moon has no capacity to fulfill its nature well — it makes promises it cannot keep. Yet its accidental score is the second-highest in the chart (+10): angular in the 4th, free from the Sun, fast, waxing. This is the "incompetent person in a leadership role" archetype. The Moon can <em>do</em> a great deal; whether what it does is any good is another question.</p>
+
+  <p><strong style="color:var(--gold)">Venus</strong> is the chart's weakest planet by a devastating margin (−20). Peregrine, retrograde, under the beams, slower than average, contrary to hayz, and now placed in the 8th house — every possible debilitating condition is present. The earlier 7th-house reading offered at least a thin life raft of angularity; with the cusp correction, that raft is gone and replaced by the −4 of a malefic house. Venus is accumulating debilities from both the essential and accidental columns with nothing to offset them.</p>
+
+  <p><strong style="color:var(--gold)">Mercury and Mars</strong> both carry the peregrine penalty but diverge in opposite directions. Mars gains from being free of the Sun, direct, and fast (+6 accidental), keeping its total barely positive. Mercury (−13), even with the remarkable +10 from dual benefic conjunctions, is overwhelmed: retrograde, nearly stationary, under the beams, and now scored in the 8th house rather than the 7th. The benefic conjunctions with Venus and Jupiter are Mercury's only source of accidental strength — without them, Mercury would score −23. That the two benefics are themselves compromised (Venus catastrophically so) raises the question of how much their support is actually worth.</p>
+
+  <p style="margin-top:1rem; padding-top:0.8rem; border-top:1px solid var(--border); color:var(--text-dim); font-size:0.85rem;"><em>Four of seven planets are peregrine. Five of seven occupy the 8th house. The chart's functional strength concentrates in the Sun–Jupiter–Saturn triad, with Jupiter doing the most but promising the least, and the Sun promising the most but constrained by house. The Moon amplifies everything it touches without essential discrimination. The bottom of the chart is stark: Venus at −20 and Mercury at −13 are deeply compromised planets whose benefic conjunctions with each other and with Jupiter form a mutual support network among the weakened — a cluster of debilitated planets propping each other up inside a malefic house.</em></p>
+</div>
+
+</div>
+</body>
+</html>
