@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Table of Strengths & Debilities — Scored</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<title>Table of Strengths & Debilities — Icey</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #0e0e12;
@@ -13,12 +13,13 @@
   --border: #2a2a36;
   --border-light: #3a3a46;
   --text: #d4d0c8;
-  --text-dim: #7a7770;
+  --text-dim: #a8a49c;
   --text-bright: #ede8df;
   --gold: #c4a44e;
   --gold-dim: #8a7535;
   --pos: #7ab87a;
   --neg: #c47a6e;
+  --alt: #7a9ec4;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,9 +27,10 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Lato', 'Helvetica Neue', sans-serif;
   font-size: 1.05rem;
-  line-height: 1.5;
+  font-weight: 400;
+  line-height: 1.6;
   padding: 2rem 1.5rem;
 }
 
@@ -42,7 +44,8 @@ header {
 }
 
 header h1 {
-  font-size: 2rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem;
   font-weight: 700;
   color: var(--gold);
   letter-spacing: 0.15em;
@@ -51,23 +54,23 @@ header h1 {
 }
 
 header .subtitle {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--text-dim);
-  font-style: italic;
+  
 }
 
 .chart-inputs {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: 0.8rem;
   margin: 1.5rem 0 2rem;
   padding: 1.2rem;
   background: var(--surface);
   border: 1px solid var(--border);
+  font-size: 0.98rem;
 }
 
 .chart-inputs label {
-  font-size: 0.95rem;
   color: var(--text-dim);
   display: flex;
   align-items: center;
@@ -81,20 +84,43 @@ header .subtitle {
   padding: 0.2rem 0.4rem;
   color: var(--text-bright);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
-/* Table */
+/* ── Legend for dual Moon ── */
+.legend {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin: 0 0 1.5rem;
+  padding: 0.7rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 1rem;
+  color: var(--text-dim);
+}
+.legend .swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+.legend .swatch.caz { background: var(--pos); }
+.legend .swatch.com { background: var(--alt); }
+
+/* ── Table ── */
 .scoring-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 1rem;
+  font-size: 0.98rem;
   margin-bottom: 2rem;
 }
 
 .scoring-table th,
 .scoring-table td {
-  padding: 0.55rem 0.6rem;
+  padding: 0.5rem 0.5rem;
   text-align: center;
   border: 1px solid var(--border);
   vertical-align: middle;
@@ -102,40 +128,40 @@ header .subtitle {
 
 .scoring-table th {
   background: var(--surface2);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-bright);
   font-size: 0.95rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 }
 
 .scoring-table th.planet-header {
-  font-size: 0.9rem;
-  padding: 0.7rem 0.5rem;
-  min-width: 90px;
+  font-size: 1rem;
+  padding: 0.6rem 0.4rem;
+  min-width: 85px;
 }
 
 .scoring-table th.planet-header .symbol {
   display: block;
   font-family: serif;
-  font-size: 1.4rem;
-  margin-bottom: 0.15rem;
+  font-size: 1.3rem;
+  margin-bottom: 0.1rem;
 }
 
 .scoring-table th.planet-header .slot {
   display: block;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
+  font-size: 0.98rem;
   color: var(--text-dim);
-  margin-top: 0.25rem;
-  min-height: 2rem;
+  margin-top: 0.2rem;
+  min-height: 1.8rem;
   border-top: 1px dotted var(--border-light);
-  padding-top: 0.2rem;
+  padding-top: 0.15rem;
   line-height: 1.4;
 }
 
 .scoring-table td.category {
   text-align: left;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text);
   background: var(--surface);
   padding-left: 0.8rem;
@@ -145,25 +171,26 @@ header .subtitle {
 
 .scoring-table td.subcategory {
   text-align: left;
-  padding-left: 1.6rem;
+  padding-left: 1.4rem;
   color: var(--text-dim);
   background: var(--surface);
-  font-size: 0.92rem;
+  font-size: 0.94rem;
 }
 
 .section-header {
   background: var(--surface2) !important;
+  font-family: 'Cinzel', serif;
   font-weight: 700 !important;
   color: var(--gold) !important;
   text-align: left !important;
-  padding: 0.6rem 0.8rem !important;
-  font-size: 0.95rem !important;
+  padding: 0.55rem 0.8rem !important;
+  font-size: 1rem !important;
   letter-spacing: 0.06em;
 }
 
 .sub-section {
   background: var(--surface2) !important;
-  font-size: 0.85rem !important;
+  font-size: 0.98rem !important;
   color: var(--text-dim) !important;
   text-align: left !important;
   padding-left: 1.4rem !important;
@@ -173,132 +200,143 @@ header .subtitle {
   background: var(--surface2);
   font-weight: 700;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   border-top: 2px solid var(--border);
-  padding: 0.6rem;
+  padding: 0.55rem;
 }
 
 .grand-total td {
   background: #1a1a22;
   font-weight: 700;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 1.1rem;
+  font-size: 1rem;
   border-top: 3px double var(--gold-dim);
   color: var(--text-bright);
-  padding: 0.75rem 0.6rem;
+  padding: 0.7rem 0.5rem;
 }
 
-/* Scored cells */
+/* ── Scored cells ── */
 td.s {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.9rem;
+  font-size: 1rem;
   background: rgba(255,255,255,0.02);
-  min-width: 55px;
+  min-width: 50px;
 }
 
 td.s.pos { color: var(--pos); }
 td.s.neg { color: var(--neg); }
 td.s.zero { color: var(--text-dim); }
 
+/* Dual-score Moon cell */
+td.s.dual {
+  line-height: 1.3;
+}
+td.s.dual .caz { color: var(--pos); }
+td.s.dual .com { color: var(--alt); }
+td.s.dual .sep { color: var(--text-dim); font-size: 0.8rem; }
+
 td.fill-total {
   background: rgba(255,255,255,0.03);
-  min-width: 55px;
+  min-width: 50px;
 }
 
-.na { color: var(--text-dim); font-style: italic; font-size: 0.85rem; }
+.na { color: var(--text-dim);  font-size: 0.98rem; }
 
 .pts-col {
-  font-size: 0.8rem;
+  font-size: 0.94rem;
   color: var(--text-dim);
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Note annotation in cells */
 td.s .note {
   display: block;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.7rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
   color: var(--text-dim);
-  font-style: italic;
+  
   line-height: 1.1;
   margin-top: 1px;
 }
 
-/* Subtotal and total coloring */
+/* ── Subtotal/total coloring ── */
 .subtotal-row td.pos, .grand-total td.pos { color: var(--pos); }
 .subtotal-row td.neg, .grand-total td.neg { color: var(--neg); }
 .subtotal-row td.zero, .grand-total td.zero { color: var(--text-dim); }
+.subtotal-row td.dual-total, .grand-total td.dual-total {
+  font-size: 1rem;
+  line-height: 1.4;
+}
 
-/* Interpretive summary */
+/* ── Summary ── */
 .summary {
   background: var(--surface);
   border: 1px solid var(--border);
   padding: 1.5rem;
   margin-top: 2rem;
-  font-size: 0.98rem;
-  line-height: 1.7;
+  font-size: 0.9rem;
+  line-height: 1.75;
 }
 
 .summary h3 {
+  font-family: 'Cinzel', serif;
   color: var(--gold);
-  font-size: 1.15rem;
+  font-size: 1rem;
   margin-bottom: 0.8rem;
 }
 
-.summary p {
-  margin-bottom: 0.8rem;
-}
+.summary p { margin-bottom: 0.8rem; }
 
 .summary .rank-list {
-  margin: 0.6rem 0 1rem 1.2rem;
+  margin: 0.6rem 0 1rem 1rem;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 2;
 }
-
 .summary .rank-list .pos { color: var(--pos); }
 .summary .rank-list .neg { color: var(--neg); }
+.summary .rank-list .alt { color: var(--alt); }
 
 .summary .note-block {
   margin-top: 1rem;
   padding-top: 0.8rem;
   border-top: 1px solid var(--border);
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--text-dim);
-  font-style: italic;
+  
 }
 
-/* Reference key */
+/* ── Reference ── */
 .reference {
   background: var(--surface);
   border: 1px solid var(--border);
   padding: 1.5rem;
   margin-top: 2rem;
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   line-height: 1.8;
 }
 
 .reference h3 {
+  font-family: 'Cinzel', serif;
   color: var(--gold);
-  font-size: 1.15rem;
+  font-size: 1rem;
   margin-bottom: 0.8rem;
 }
 
-.reference .ref-section {
-  margin-bottom: 1rem;
-}
+.reference .ref-section { margin-bottom: 1rem; }
 
 .reference .ref-title {
   font-weight: 700;
   color: var(--text-bright);
   margin-bottom: 0.3rem;
+  font-size: 0.95rem;
 }
 
 .ref-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.3rem 2rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--text-dim);
 }
 
@@ -308,19 +346,21 @@ td.s .note {
 }
 
 @media (max-width: 900px) {
-  .scoring-table { font-size: 0.88rem; }
-  .scoring-table th, .scoring-table td { padding: 0.4rem; }
+  .scoring-table { font-size: 0.8rem; }
+  .scoring-table th, .scoring-table td { padding: 0.35rem; }
   .chart-inputs { grid-template-columns: 1fr; }
   .ref-grid { grid-template-columns: 1fr; }
+  .legend { flex-direction: column; gap: 0.5rem; }
 }
 
 @media print {
-  body { background: #fff; color: #222; }
+  body { background: #fff; color: #222; font-weight: 400; }
   .scoring-table th, .scoring-table td { border-color: #999; }
   .scoring-table th { background: #eee; color: #222; }
   td.s { background: #fafafa; }
   td.s.pos { color: #2a7a2a; }
   td.s.neg { color: #a03020; }
+  td.s.dual .com { color: #3a6a9a; }
   .section-header { background: #e8e4d8 !important; color: #6a5a2e !important; }
   .subtotal-row td, .grand-total td { background: #eee; color: #222; }
   .reference, .summary { background: #f5f5f0; border-color: #ccc; }
@@ -334,7 +374,7 @@ td.s .note {
 
 <header>
   <h1>Table of Strengths &amp; Debilities</h1>
-  <div class="subtitle">After the method of Avelar &amp; Ribeiro, <em>On the Heavenly Spheres</em></div>
+  <div class="subtitle">After the method of Avelar &amp; Ribeiro, On the Heavenly Spheres</div>
 </header>
 
 <div class="chart-inputs">
@@ -345,7 +385,12 @@ td.s .note {
   <label>ASC: <span class="field">♈ 24°27′</span></label>
   <label>MC: <span class="field">♑ 10°36′</span></label>
   <label>Sect: <span class="field">Night</span></label>
-  <label>Zodiac: <span class="field">Sidereal · Lahiri · Placidus</span></label>
+  <label>Zodiac: <span class="field">Sidereal · Lahiri (23°55′) · Placidus</span></label>
+</div>
+
+<div class="legend">
+  <span><span class="swatch caz"></span> Moon scored as <strong>cazimi</strong> (+5)</span>
+  <span><span class="swatch com"></span> Moon scored as <strong>combust</strong> (−6)</span>
 </div>
 
 <table class="scoring-table">
@@ -365,7 +410,7 @@ td.s .note {
   <th class="planet-header"><span class="symbol">♂</span>Mars<span class="slot">♌ 28°31′<br>H5</span></th>
   <th class="planet-header"><span class="symbol">♃</span>Jupiter<span class="slot">♍ 3°48′<br>H5</span></th>
   <th class="planet-header"><span class="symbol">♄</span>Saturn<span class="slot">♋ 0°49′<br>H3</span></th>
-  <th style="font-size:0.8rem">Pts</th>
+  <th style="font-size:0.72rem">Pts</th>
 </tr>
 </thead>
 <tbody>
@@ -375,7 +420,6 @@ td.s .note {
 <!-- ═══════════════════════════════════════════ -->
 <tr><td colspan="9" class="section-header">PART 1 · ESSENTIAL DIGNITIES</td></tr>
 
-<!-- Rulership: Sun rules Leo -->
 <tr>
   <td class="subcategory">Rulership</td>
   <td class="s pos">+5<span class="note">♌ dom.</span></td>
@@ -388,7 +432,6 @@ td.s .note {
   <td class="pts-col">+5</td>
 </tr>
 
-<!-- Exaltation: none -->
 <tr>
   <td class="subcategory">Exaltation</td>
   <td class="s zero">—</td>
@@ -401,7 +444,6 @@ td.s .note {
   <td class="pts-col">+4</td>
 </tr>
 
-<!-- Triplicity: night chart, fire = Jupiter; earth = Moon; air = Mercury; water = Mars — none match -->
 <tr>
   <td class="subcategory">Triplicity</td>
   <td class="s zero">—</td>
@@ -414,7 +456,6 @@ td.s .note {
   <td class="pts-col">+3</td>
 </tr>
 
-<!-- Term (Egyptian): Mars term ♌ 24–30 → Mars +2 -->
 <tr>
   <td class="subcategory">Term (Egyptian)</td>
   <td class="s zero">—</td>
@@ -427,7 +468,6 @@ td.s .note {
   <td class="pts-col">+2</td>
 </tr>
 
-<!-- Face (decan): ♌ 20–30 = Mars face → Mars +1 -->
 <tr>
   <td class="subcategory">Face (decan)</td>
   <td class="s zero">—</td>
@@ -440,7 +480,6 @@ td.s .note {
   <td class="pts-col">+1</td>
 </tr>
 
-<!-- Detriment: Jupiter det. in ♍; Saturn det. in ♋ -->
 <tr>
   <td class="subcategory">Detriment</td>
   <td class="s zero">—</td>
@@ -453,7 +492,6 @@ td.s .note {
   <td class="pts-col">−5</td>
 </tr>
 
-<!-- Fall: none -->
 <tr>
   <td class="subcategory">Fall</td>
   <td class="s zero">—</td>
@@ -466,7 +504,6 @@ td.s .note {
   <td class="pts-col">−4</td>
 </tr>
 
-<!-- ESSENTIAL SUBTOTAL -->
 <tr class="subtotal-row">
   <td class="category">Essential Subtotal</td>
   <td class="fill-total pos">+5</td>
@@ -484,7 +521,6 @@ td.s .note {
 <!-- ═══════════════════════════════════════════ -->
 <tr><td colspan="9" class="section-header">PEREGRINE &amp; MUTUAL RECEPTION</td></tr>
 
-<!-- Peregrine: Moon, Mercury, Venus have 0 dignity; Jupiter & Saturn have detriment but 0 positive dignity → also peregrine -->
 <tr>
   <td class="subcategory">Peregrine (if no dignity)</td>
   <td class="s zero">—</td>
@@ -497,7 +533,6 @@ td.s .note {
   <td class="pts-col">−5</td>
 </tr>
 
-<!-- Mutual reception by rulership: none found -->
 <tr>
   <td class="subcategory">Mutual reception (rulership)</td>
   <td class="s zero">—</td>
@@ -510,7 +545,6 @@ td.s .note {
   <td class="pts-col">+5</td>
 </tr>
 
-<!-- Mutual reception by exaltation: none -->
 <tr>
   <td class="subcategory">Mutual reception (exaltation)</td>
   <td class="s zero">—</td>
@@ -523,7 +557,6 @@ td.s .note {
   <td class="pts-col">+4</td>
 </tr>
 
-<!-- ADJUSTED ESSENTIAL TOTAL -->
 <tr class="subtotal-row">
   <td class="category">Adjusted Essential Total</td>
   <td class="fill-total pos">+5</td>
@@ -544,7 +577,6 @@ td.s .note {
 <!-- 2A · Position by House -->
 <tr><td colspan="9" class="sub-section">2A · Position by House</td></tr>
 
-<!-- Angularity: H5=+3, H4=+4, H3=+1 -->
 <tr>
   <td class="subcategory">Angularity</td>
   <td class="s pos">+3<span class="note">H5</span></td>
@@ -557,7 +589,6 @@ td.s .note {
   <td class="pts-col">±5</td>
 </tr>
 
-<!-- Joy by house: none match -->
 <tr>
   <td class="subcategory">Joy by house</td>
   <td class="s zero">—</td>
@@ -573,11 +604,11 @@ td.s .note {
 <!-- 2B · Relationship to the Sun -->
 <tr><td colspan="9" class="sub-section">2B · Relationship to the Sun</td></tr>
 
-<!-- Combust / beams / free / cazimi -->
+<!-- DUAL MOON CELL: cazimi +5 / combust −6 -->
 <tr>
   <td class="subcategory">Combust / beams / free / cazimi</td>
   <td class="na">N/A</td>
-  <td class="s pos">+5<span class="note">cazimi 0°30′</span></td>
+  <td class="s dual"><span class="caz">+5</span> <span class="sep">/</span> <span class="com">−6</span><span class="note">cazimi / combust 0°30′</span></td>
   <td class="s neg">−4<span class="note">beams 16°34′</span></td>
   <td class="s pos">+5<span class="note">free 43°45′</span></td>
   <td class="s pos">+5<span class="note">cazimi 0°18′</span></td>
@@ -586,7 +617,6 @@ td.s .note {
   <td class="pts-col">±6</td>
 </tr>
 
-<!-- Increasing / decreasing light -->
 <tr>
   <td class="subcategory">Increasing / decreasing light</td>
   <td class="na">N/A</td>
@@ -599,7 +629,6 @@ td.s .note {
   <td class="pts-col">±1</td>
 </tr>
 
-<!-- Orientality / occidentality -->
 <tr>
   <td class="subcategory">Orientality / occidentality</td>
   <td class="na">N/A</td>
@@ -615,7 +644,6 @@ td.s .note {
 <!-- 2C · Motion -->
 <tr><td colspan="9" class="sub-section">2C · Motion</td></tr>
 
-<!-- Direction (D/R) — Sun & Moon always direct, N/A -->
 <tr>
   <td class="subcategory">Direction (D / R)</td>
   <td class="na">N/A</td>
@@ -628,23 +656,21 @@ td.s .note {
   <td class="pts-col">+4/−5</td>
 </tr>
 
-<!-- Velocity — no precise ephemeris data available; scored 0 across the board -->
 <tr>
   <td class="subcategory">Velocity (vs. mean)</td>
-  <td class="s zero">0</td>
-  <td class="s zero">0</td>
-  <td class="s zero">0</td>
-  <td class="s zero">0</td>
-  <td class="s zero">0</td>
-  <td class="s zero">0</td>
-  <td class="s zero">0</td>
+  <td class="s zero">0<span class="note">0°58′ ≈ mean</span></td>
+  <td class="s neg">−2<span class="note">12°48′ &lt; 13°10′</span></td>
+  <td class="s zero">0<span class="note">1°23′ ≈ mean</span></td>
+  <td class="s neg">−2<span class="note">1°06′ &lt; 1°12′</span></td>
+  <td class="s pos">+2<span class="note">0°39′ &gt; 0°31′</span></td>
+  <td class="s pos">+2<span class="note">0°13′ &gt; 0°05′</span></td>
+  <td class="s pos">+2<span class="note">0°05′ &gt; 0°02′</span></td>
   <td class="pts-col">±2</td>
 </tr>
 
 <!-- 2D · Aspects -->
 <tr><td colspan="9" class="sub-section">2D · Aspects</td></tr>
 
-<!-- Conj / △ / ✶ benefic (♀ ♃) -->
 <tr>
   <td class="subcategory">Conj / △ / ✶ benefic (♀ ♃)</td>
   <td class="s pos">+5<span class="note">☉☌♃</span></td>
@@ -657,7 +683,6 @@ td.s .note {
   <td class="pts-col">+5/4/3</td>
 </tr>
 
-<!-- Conj / ☍ / □ malefic (♂ ♄) -->
 <tr>
   <td class="subcategory">Conj / ☍ / □ malefic (♂ ♄)</td>
   <td class="s neg">−5<span class="note">☉☌♂</span></td>
@@ -670,7 +695,6 @@ td.s .note {
   <td class="pts-col">−5/4/3</td>
 </tr>
 
-<!-- Assisted / besieged: none -->
 <tr>
   <td class="subcategory">Assisted / besieged</td>
   <td class="s zero">—</td>
@@ -683,7 +707,6 @@ td.s .note {
   <td class="pts-col">±5</td>
 </tr>
 
-<!-- Void of course / feral: Moon VoC (no applying aspect before leaving ♌); Venus VoC (no applying aspect before leaving ♋) -->
 <tr>
   <td class="subcategory">Void of course / feral</td>
   <td class="s zero">—</td>
@@ -699,7 +722,6 @@ td.s .note {
 <!-- 2E · Conformity -->
 <tr><td colspan="9" class="sub-section">2E · Conformity</td></tr>
 
-<!-- Hayz / contrary to hayz -->
 <tr>
   <td class="subcategory">Hayz / contrary to hayz</td>
   <td class="s zero">0<span class="note">mixed</span></td>
@@ -712,7 +734,6 @@ td.s .note {
   <td class="pts-col">+3/−2</td>
 </tr>
 
-<!-- Joy by sign: Sun in Leo = +3 -->
 <tr>
   <td class="subcategory">Joy by sign</td>
   <td class="s pos">+3<span class="note">☉ → ♌</span></td>
@@ -728,7 +749,6 @@ td.s .note {
 <!-- 2F · Lunar Nodes -->
 <tr><td colspan="9" class="sub-section">2F · Lunar Nodes</td></tr>
 
-<!-- Conj. North Node — none within orb -->
 <tr>
   <td class="subcategory">Conj. North Node</td>
   <td class="s zero">—</td>
@@ -741,7 +761,6 @@ td.s .note {
   <td class="pts-col">−3</td>
 </tr>
 
-<!-- Conj. South Node — none within orb -->
 <tr>
   <td class="subcategory">Conj. South Node</td>
   <td class="s zero">—</td>
@@ -757,7 +776,6 @@ td.s .note {
 <!-- 2G · Lunar Conditions (☽ only) -->
 <tr><td colspan="9" class="sub-section">2G · Lunar Conditions (☽ only)</td></tr>
 
-<!-- Via combusta / Gemini / end-sign: Moon at 28°43′ Leo = end of sign → −2 -->
 <tr>
   <td class="subcategory">Via combusta / Gemini / end-sign</td>
   <td class="na">N/A</td>
@@ -770,7 +788,6 @@ td.s .note {
   <td class="pts-col">−2</td>
 </tr>
 
-<!-- Eclipsed Moon: not eclipsed -->
 <tr>
   <td class="subcategory">Eclipsed Moon</td>
   <td class="na">N/A</td>
@@ -784,9 +801,8 @@ td.s .note {
 </tr>
 
 <!-- 2H · Fixed Stars -->
-<tr><td colspan="9" class="sub-section">2H · Fixed Stars (note epoch)</td></tr>
+<tr><td colspan="9" class="sub-section">2H · Fixed Stars (Lahiri 23°55′ · epoch 2004)</td></tr>
 
-<!-- Conj. benefic fixed star: Venus ☌ Sirius (~♋ 14°05′) within ~0°23′ -->
 <tr>
   <td class="subcategory">Conj. benefic fixed star</td>
   <td class="s zero">—</td>
@@ -799,14 +815,14 @@ td.s .note {
   <td class="pts-col">+5</td>
 </tr>
 
-<!-- Conj. malefic fixed star: Denebola (♌ 27°46′ sid.) conjunct Sun 0°27′, Moon 0°57′, Mars 0°45′ -->
+<!-- Denebola at sidereal ♌ 27°44′ (trop. 21°39′ ♍ − 23°55′ ayanamsa) -->
 <tr>
   <td class="subcategory">Conj. malefic fixed star</td>
-  <td class="s neg">−5<span class="note">Denebola 0°27′</span></td>
-  <td class="s neg">−5<span class="note">Denebola 0°57′</span></td>
+  <td class="s neg">−5<span class="note">Denebola 0°29′</span></td>
+  <td class="s neg">−5<span class="note">Denebola 0°59′</span></td>
   <td class="s zero">—</td>
   <td class="s zero">—</td>
-  <td class="s neg">−5<span class="note">Denebola 0°45′</span></td>
+  <td class="s neg">−5<span class="note">Denebola 0°47′</span></td>
   <td class="s zero">—</td>
   <td class="s zero">—</td>
   <td class="pts-col">−5</td>
@@ -815,30 +831,34 @@ td.s .note {
 <!-- ═══════════════════════════════════════════ -->
 <!-- ACCIDENTAL SUBTOTAL                        -->
 <!-- ═══════════════════════════════════════════ -->
+<!-- Moon cazimi acc: +3+0+5+1+2-2+5-5+0-2+0+0+0+0-2+0+0-5 = 0 -->
+<!-- Moon combust acc: +3+0-6+1+2-2+5-5+0-2+0+0+0+0-2+0+0-5 = -11 -->
 <tr class="subtotal-row">
   <td class="category">Accidental Subtotal</td>
   <td class="fill-total pos">+1</td>
-  <td class="fill-total pos">+2</td>
+  <td class="fill-total dual-total"><span style="color:var(--pos)">0</span> <span style="color:var(--text-dim)">/</span> <span style="color:var(--alt)">−11</span></td>
   <td class="fill-total zero">0</td>
-  <td class="fill-total pos">+11</td>
   <td class="fill-total pos">+9</td>
-  <td class="fill-total neg">−9</td>
-  <td class="fill-total pos">+14</td>
+  <td class="fill-total pos">+11</td>
+  <td class="fill-total neg">−7</td>
+  <td class="fill-total pos">+16</td>
   <td></td>
 </tr>
 
 <!-- ═══════════════════════════════════════════ -->
 <!-- GRAND TOTAL                                -->
 <!-- ═══════════════════════════════════════════ -->
+<!-- Moon cazimi grand: -5 + 0 = -5 -->
+<!-- Moon combust grand: -5 + (-11) = -16 -->
 <tr class="grand-total">
   <td class="category" style="color:var(--gold)">GRAND TOTAL</td>
   <td class="fill-total pos">+6</td>
-  <td class="fill-total neg">−3</td>
+  <td class="fill-total dual-total"><span style="color:var(--pos)">−5</span> <span style="color:var(--text-dim)">/</span> <span style="color:var(--alt)">−16</span></td>
   <td class="fill-total neg">−5</td>
-  <td class="fill-total pos">+6</td>
-  <td class="fill-total pos">+12</td>
-  <td class="fill-total neg">−19</td>
   <td class="fill-total pos">+4</td>
+  <td class="fill-total pos">+14</td>
+  <td class="fill-total neg">−17</td>
+  <td class="fill-total pos">+6</td>
   <td></td>
 </tr>
 
@@ -852,32 +872,26 @@ td.s .note {
   <h3>Interpretive Summary</h3>
 
   <div class="rank-list">
-    <span class="pos">1. ♂ Mars &nbsp;+12</span> &nbsp;(ess. +3 · acc. +9)<br>
-    <span class="pos">2. ☉ Sun &nbsp;&nbsp;&nbsp;+6</span> &nbsp;(ess. +5 · acc. +1)<br>
-    <span class="pos">3. ♀ Venus &nbsp;+6</span> &nbsp;(ess. −5 · acc. +11)<br>
-    <span class="pos">4. ♄ Saturn +4</span> &nbsp;&nbsp;(ess. −10 · acc. +14)<br>
-    <span class="neg">5. ☽ Moon &nbsp;&nbsp;−3</span> &nbsp;(ess. −5 · acc. +2)<br>
-    <span class="neg">6. ☿ Mercury −5</span> &nbsp;(ess. −5 · acc. 0)<br>
-    <span class="neg">7. ♃ Jupiter −19</span> (ess. −10 · acc. −9)<br>
+    <span class="pos">1. ♂ Mars &nbsp;&nbsp;+14</span> &nbsp;(ess. +3 · acc. +11)<br>
+    <span class="pos">2. ☉ Sun &nbsp;&nbsp;&nbsp;+6</span> &nbsp;&nbsp;(ess. +5 · acc. +1)<br>
+    <span class="pos">3. ♄ Saturn &nbsp;+6</span> &nbsp;&nbsp;(ess. −10 · acc. +16)<br>
+    <span class="pos">4. ♀ Venus &nbsp;+4</span> &nbsp;&nbsp;(ess. −5 · acc. +9)<br>
+    <span class="neg">5. ☿ Mercury −5</span> &nbsp;(ess. −5 · acc. 0)<br>
+    <span class="pos">6. ☽ Moon &nbsp;&nbsp;−5</span> &nbsp;(ess. −5 · acc. 0) &nbsp;<span class="alt">or −16</span> <span class="alt">(ess. −5 · acc. −11)</span><br>
+    <span class="neg">7. ♃ Jupiter −17</span> (ess. −10 · acc. −7)<br>
   </div>
 
-  <p><strong>Denebola dominates the accidental picture.</strong> The malefic fixed star at sidereal Leo 27°46′ falls within 1° of the Sun, Moon, and Mars — the chart's entire cazimi cluster. Each receives −5, which is the single largest accidental debility after combustion. This substantially reshapes the hierarchy: Mars remains the strongest planet but drops from commanding to moderate, the Sun falls into a tie with Venus, and the Moon crosses into negative territory.</p>
+  <p><strong>The Moon's score depends entirely on whether the 0°30′ separation is read as cazimi or combust.</strong> At cazimi (+5), the Moon scores −5 overall — weak but not catastrophic, held afloat by the Jupiter conjunction, increasing light, and occidental advantage. At combust (−6), the Moon collapses to −16, making it nearly as debilitated as Jupiter and second-weakest in the chart. The 11-point swing between these two readings is the single largest interpretive variable in the entire table. The difference is not academic: it determines whether the native's emotional life is empowered-but-constrained or genuinely impaired.</p>
 
-  <p><strong>Mars (+12) is still the strongest planet in the chart,</strong> but the margin is thinner. It carries positive essential dignity (term and face in Leo, +3) and strong accidental advantages: cazimi, direct, conjunct Jupiter. Denebola cuts into that lead (−5), but Mars's diverse sources of accidental strength absorb the blow. The Denebola conjunction is interpretively significant, however — it colours the cazimi with themes of misfortune through impulsiveness or nobility misdirected.</p>
+  <p><strong>Mars (+14) leads the chart decisively</strong> — cazimi, fast (0°39′/day, 126% of mean), direct, conjunct Jupiter, with term and face in Leo. Denebola (−5) cuts into the total but Mars's diverse accidental strengths absorb the blow. As lord of the Ascendant in a night chart, Mars is both the native's primary instrument and the planet most likely to cause harm through its own excess.</p>
 
-  <p><strong>The Sun (+6)</strong> is the only planet in full domicile, with the highest essential quality in the chart (+5). Its accidental score is now barely positive (+1): the benefic/malefic conjunction cancellation (Jupiter +5, Mars −5) plus sign joy (+3) are offset by Denebola (−5). The Sun's strength is almost entirely essential — it knows what it is and can deliver on its nature, but the circumstances conspire to limit its reach.</p>
+  <p><strong>The Sun (+6) and Saturn (+6) tie for second</strong> from opposite foundations. The Sun's strength is almost entirely essential — domicile in Leo (+5) with thin accidental support (+1), as the benefic and malefic conjunctions cancel and Denebola erodes the sign joy. Saturn's strength is entirely accidental (+16) — free from the Sun, oriental, fast (0°05′/day, ~2.5× mean), direct, sextile Jupiter — built on top of essential ruin (detriment and peregrine, −10). The Sun knows what it is but can't always act; Saturn acts constantly but doesn't know what it's doing.</p>
 
-  <p><strong>Venus (+6)</strong> ties the Sun on a completely opposite footing: essentially peregrine (−5) but accidentally robust (+11). Angularity in H4, freedom from the Sun, full hayz, and direct motion build her accidental score, though void of course limits follow-through. Venus is conspicuous and active but lacks essential grounding — a person of visible influence who doesn't quite know what to do with it.</p>
+  <p><strong>Venus (+4)</strong> is the chart's emotional anchor — angular in H4, free from the Sun, in full hayz — but slower than her mean (1°06′ vs. 1°12′) and void of course. She delivers warmth and domestic stability but with limited follow-through. As ruler of the 7th, partnerships begin with genuine feeling but may stall before completion.</p>
 
-  <p><strong>Saturn (+4)</strong> presents the starkest essential/accidental contrast. In detriment and peregrine (−10 essential) but scoring +14 accidentally through freedom from the Sun, oriental position, direct motion, and a sextile from Jupiter. This is an incompetent figure in a position of some influence — active and visible but delivering Saturnine themes in a distorted Cancerian register.</p>
+  <p><strong>Jupiter (−17) remains the weakest planet.</strong> In detriment, peregrine, combust, conjunct Mars, occidental, and contrary to hayz. The fast speed (+2) is the only bright spot, and it merely means Jupiter rushes ineffectively through a sign that rejects it.</p>
 
-  <p><strong>The Moon (−3)</strong> now finishes negative despite cazimi. Peregrine (−5), void of course (−2), at the end of Leo (−2), and conjunct Denebola (−5) overwhelm the cazimi (+5), Jupiter conjunction (+5), increasing light (+1), and occidental advantage (+2). The Moon is the most conflicted planet in the chart — intensely activated by cazimi but undermined at every other turn.</p>
-
-  <p><strong>Mercury (−5)</strong> is under the beams at 16°34′ from the Sun, oriental when it would prefer to be occidental, and peregrine. Direct motion (+4) barely offsets the penalties. Mercury is the most neutral planet — not strong enough to matter, not weak enough to be a clear problem.</p>
-
-  <p><strong>Jupiter (−19) is the weakest planet by a wide margin.</strong> In detriment in Virgo and peregrine (−10 essential), then combust (−6), conjunct malefic Mars (−5), occidental (−2), and contrary to hayz (−2). As a natural benefic, this severely limits the chart's access to Jupiterian goods. Whatever Jupiter signifies by house rulership will be delivered with difficulty and distortion.</p>
-
-  <p class="note-block"><strong>Notes on methodology:</strong> Moon and Mars are scored as cazimi per instruction, though Mars at 0°18′ from the Sun falls just outside the strict 0°17′ boundary — an interpretive judgment that recognises the effective unity of the triple conjunction. Velocity could not be scored without precise ephemeris daily-motion figures for 14 Sep 2004 and is marked 0 across the board; if daily-motion data are provided, each planet could shift ±2. Lahiri ayanamsa at epoch ≈ 23°54′. Fixed star positions are from the Orphic Astrology catalogue (Lahiri ayanamsa). Denebola at sidereal Leo 27°46′ is the only 1st/2nd magnitude star from the standard benefic/malefic lists within 1° of any planet. Procyon (sidereal Cancer 1°56′) falls ~1°07′ from Saturn but is not on the standard scoring list. Praesepe (sidereal Cancer 13°21′) is near Venus but is a nebular cluster, not a discrete 1st/2nd magnitude star.</p>
+  <p class="note-block"><strong>Notes on methodology:</strong> Mars is scored as cazimi (0°18′ from the Sun, at the traditional 0°17′ boundary — treated as cazimi given the phenomenological reality of complete solar absorption). Moon at 0°30′ is outside the strict cazimi orb; both cazimi and combust interpretations are presented in parallel throughout the table. Denebola is placed at sidereal ♌ 27°44′, derived from tropical 21°39′ Virgo (2004 epoch) minus Lahiri ayanamsa 23°55′. Separations: Sun 0°29′, Mars 0°47′, Moon 0°59′ — all within standard 1° fixed-star orb. Velocity derived from Astro-Seek Lahiri ephemeris, Sep 13–14 2004 daily position differences.</p>
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
