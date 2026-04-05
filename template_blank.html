@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Table of Strengths & Debilities — Blank Template</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0e12;
+  --surface: #16161c;
+  --surface2: #1c1c24;
+  --border: #2a2a36;
+  --border-light: #3a3a46;
+  --text: #d4d0c8;
+  --text-dim: #7a7770;
+  --text-bright: #ede8df;
+  --gold: #c4a44e;
+  --gold-dim: #8a7535;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  padding: 2rem 1.5rem;
+}
+
+.container { max-width: 1300px; margin: 0 auto; }
+
+header {
+  text-align: center;
+  padding: 2rem 0 1.5rem;
+  border-bottom: 1px solid var(--gold-dim);
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+header .subtitle {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.chart-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+  padding: 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.chart-inputs label {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chart-inputs .field {
+  display: inline-block;
+  min-width: 140px;
+  border-bottom: 1px solid var(--border-light);
+  padding: 0.2rem 0.4rem;
+  color: var(--text-bright);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+}
+
+/* Table */
+.scoring-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.scoring-table th,
+.scoring-table td {
+  padding: 0.55rem 0.6rem;
+  text-align: center;
+  border: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.scoring-table th {
+  background: var(--surface2);
+  font-weight: 600;
+  color: var(--text-bright);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+}
+
+.scoring-table th.planet-header {
+  font-size: 0.9rem;
+  padding: 0.7rem 0.5rem;
+  min-width: 90px;
+}
+
+.scoring-table th.planet-header .symbol {
+  display: block;
+  font-family: serif;
+  font-size: 1.4rem;
+  margin-bottom: 0.15rem;
+}
+
+.scoring-table th.planet-header .slot {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 0.25rem;
+  min-height: 2rem;
+  border-top: 1px dotted var(--border-light);
+  padding-top: 0.2rem;
+}
+
+.scoring-table td.category {
+  text-align: left;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface);
+  padding-left: 0.8rem;
+  white-space: nowrap;
+  font-size: 0.95rem;
+}
+
+.scoring-table td.subcategory {
+  text-align: left;
+  padding-left: 1.6rem;
+  color: var(--text-dim);
+  background: var(--surface);
+  font-size: 0.92rem;
+}
+
+.section-header {
+  background: var(--surface2) !important;
+  font-weight: 700 !important;
+  color: var(--gold) !important;
+  text-align: left !important;
+  padding: 0.6rem 0.8rem !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.06em;
+}
+
+.sub-section {
+  background: var(--surface2) !important;
+  font-size: 0.85rem !important;
+  color: var(--text-dim) !important;
+  text-align: left !important;
+  padding-left: 1.4rem !important;
+}
+
+.subtotal-row td {
+  background: var(--surface2);
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  border-top: 2px solid var(--border);
+  padding: 0.6rem;
+}
+
+.grand-total td {
+  background: #1a1a22;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  border-top: 3px double var(--gold-dim);
+  color: var(--text-bright);
+  padding: 0.75rem 0.6rem;
+}
+
+/* Empty cells for filling in */
+td.fill {
+  background: rgba(255,255,255,0.02);
+  min-width: 55px;
+  height: 2rem;
+}
+
+td.fill-total {
+  background: rgba(255,255,255,0.03);
+  min-width: 55px;
+}
+
+.na { color: var(--text-dim); font-style: italic; font-size: 0.85rem; }
+
+.pts-col {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Reference key */
+.reference {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.reference h3 {
+  color: var(--gold);
+  font-size: 1.15rem;
+  margin-bottom: 0.8rem;
+}
+
+.reference .ref-section {
+  margin-bottom: 1rem;
+}
+
+.reference .ref-title {
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 0.3rem;
+}
+
+.ref-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem 2rem;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.ref-grid span.val {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text);
+}
+
+@media (max-width: 900px) {
+  .scoring-table { font-size: 0.88rem; }
+  .scoring-table th, .scoring-table td { padding: 0.4rem; }
+  .chart-inputs { grid-template-columns: 1fr; }
+  .ref-grid { grid-template-columns: 1fr; }
+}
+
+@media print {
+  body { background: #fff; color: #222; }
+  .scoring-table th, .scoring-table td { border-color: #999; }
+  .scoring-table th { background: #eee; color: #222; }
+  td.fill { background: #fafafa; }
+  .section-header { background: #e8e4d8 !important; color: #6a5a2e !important; }
+  .subtotal-row td, .grand-total td { background: #eee; color: #222; }
+  .reference { background: #f5f5f0; border-color: #ccc; }
+  header { border-bottom-color: #999; }
+  header h1 { color: #6a5a2e; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Table of Strengths &amp; Debilities</h1>
+  <div class="subtitle">After the method of Avelar &amp; Ribeiro, <em>On the Heavenly Spheres</em></div>
+</header>
+
+<div class="chart-inputs">
+  <label>Name: <span class="field">&nbsp;</span></label>
+  <label>Date: <span class="field">&nbsp;</span></label>
+  <label>Time: <span class="field">&nbsp;</span></label>
+  <label>Location: <span class="field">&nbsp;</span></label>
+  <label>ASC: <span class="field">&nbsp;</span></label>
+  <label>MC: <span class="field">&nbsp;</span></label>
+  <label>Sect: <span class="field">Day / Night</span></label>
+  <label>Zodiac: <span class="field">Tropical / Sidereal</span></label>
+</div>
+
+<table class="scoring-table">
+<colgroup>
+  <col style="width:22%">
+  <col style="width:9.5%"><col style="width:9.5%"><col style="width:9.5%">
+  <col style="width:9.5%"><col style="width:9.5%"><col style="width:9.5%"><col style="width:9.5%">
+  <col style="width:8%">
+</colgroup>
+<thead>
+<tr>
+  <th></th>
+  <th class="planet-header"><span class="symbol">☉</span>Sun<span class="slot"></span></th>
+  <th class="planet-header"><span class="symbol">☽</span>Moon<span class="slot"></span></th>
+  <th class="planet-header"><span class="symbol">☿</span>Mercury<span class="slot"></span></th>
+  <th class="planet-header"><span class="symbol">♀</span>Venus<span class="slot"></span></th>
+  <th class="planet-header"><span class="symbol">♂</span>Mars<span class="slot"></span></th>
+  <th class="planet-header"><span class="symbol">♃</span>Jupiter<span class="slot"></span></th>
+  <th class="planet-header"><span class="symbol">♄</span>Saturn<span class="slot"></span></th>
+  <th style="font-size:0.8rem">Pts</th>
+</tr>
+</thead>
+<tbody>
+
+<!-- ESSENTIAL -->
+<tr><td colspan="9" class="section-header">PART 1 · ESSENTIAL DIGNITIES</td></tr>
+<tr><td class="subcategory">Rulership</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">+5</td></tr>
+<tr><td class="subcategory">Exaltation</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">+4</td></tr>
+<tr><td class="subcategory">Triplicity</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">+3</td></tr>
+<tr><td class="subcategory">Term (Egyptian)</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">+2</td></tr>
+<tr><td class="subcategory">Face (decan)</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">+1</td></tr>
+<tr><td class="subcategory">Detriment</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">−5</td></tr>
+<tr><td class="subcategory">Fall</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">−4</td></tr>
+
+<tr class="subtotal-row"><td class="category">Essential Subtotal</td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td></td></tr>
+
+<!-- PEREGRINE & RECEPTION -->
+<tr><td colspan="9" class="section-header">PEREGRINE &amp; MUTUAL RECEPTION</td></tr>
+<tr><td class="subcategory">Peregrine (if no dignity)</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">−5</td></tr>
+<tr><td class="subcategory">Mutual reception (rulership)</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">+5</td></tr>
+<tr><td class="subcategory">Mutual reception (exaltation)</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">+4</td></tr>
+
+<tr class="subtotal-row"><td class="category">Adjusted Essential Total</td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td></td></tr>
+
+<!-- ACCIDENTAL -->
+<tr><td colspan="9" class="section-header">PART 2 · ACCIDENTAL DIGNITIES</td></tr>
+
+<!-- 2A -->
+<tr><td colspan="9" class="sub-section">2A · Position by House</td></tr>
+<tr><td class="subcategory">Angularity</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">±5</td></tr>
+<tr><td class="subcategory">Joy by house</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">+2</td></tr>
+
+<!-- 2B -->
+<tr><td colspan="9" class="sub-section">2B · Relationship to the Sun</td></tr>
+<tr><td class="subcategory">Combust / beams / free / cazimi</td><td class="na" style="font-size:0.85rem">N/A</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">±6</td></tr>
+<tr><td class="subcategory">Increasing / decreasing light</td><td class="na" style="font-size:0.85rem">N/A</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">±1</td></tr>
+<tr><td class="subcategory">Orientality / occidentality</td><td class="na" style="font-size:0.85rem">N/A</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">±2</td></tr>
+
+<!-- 2C -->
+<tr><td colspan="9" class="sub-section">2C · Motion</td></tr>
+<tr><td class="subcategory">Direction (D / R)</td><td class="na" style="font-size:0.85rem">N/A</td><td class="na" style="font-size:0.85rem">N/A</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">+4/−5</td></tr>
+<tr><td class="subcategory">Velocity (vs. mean)</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">±2</td></tr>
+
+<!-- 2D -->
+<tr><td colspan="9" class="sub-section">2D · Aspects</td></tr>
+<tr><td class="subcategory">Conj / △ / ✶ benefic (♀ ♃)</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">+5/4/3</td></tr>
+<tr><td class="subcategory">Conj / ☍ / □ malefic (♂ ♄)</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">−5/4/3</td></tr>
+<tr><td class="subcategory">Assisted / besieged</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">±5</td></tr>
+<tr><td class="subcategory">Void of course / feral</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">−2/−3</td></tr>
+
+<!-- 2E -->
+<tr><td colspan="9" class="sub-section">2E · Conformity</td></tr>
+<tr><td class="subcategory">Hayz / contrary to hayz</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">+3/−2</td></tr>
+<tr><td class="subcategory">Joy by sign</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">+3</td></tr>
+
+<!-- 2F -->
+<tr><td colspan="9" class="sub-section">2F · Lunar Nodes</td></tr>
+<tr><td class="subcategory">Conj. North Node</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">−3</td></tr>
+<tr><td class="subcategory">Conj. South Node</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">−5</td></tr>
+
+<!-- 2G -->
+<tr><td colspan="9" class="sub-section">2G · Lunar Conditions (☽ only)</td></tr>
+<tr><td class="subcategory">Via combusta / Gemini / end-sign</td><td class="na" style="font-size:0.85rem">N/A</td><td class="fill"></td><td class="na" style="font-size:0.85rem">N/A</td><td class="na" style="font-size:0.85rem">N/A</td><td class="na" style="font-size:0.85rem">N/A</td><td class="na" style="font-size:0.85rem">N/A</td><td class="na" style="font-size:0.85rem">N/A</td><td class="pts-col">−2</td></tr>
+<tr><td class="subcategory">Eclipsed Moon</td><td class="na" style="font-size:0.85rem">N/A</td><td class="fill"></td><td class="na" style="font-size:0.85rem">N/A</td><td class="na" style="font-size:0.85rem">N/A</td><td class="na" style="font-size:0.85rem">N/A</td><td class="na" style="font-size:0.85rem">N/A</td><td class="na" style="font-size:0.85rem">N/A</td><td class="pts-col">−5</td></tr>
+
+<!-- 2H -->
+<tr><td colspan="9" class="sub-section">2H · Fixed Stars (note epoch)</td></tr>
+<tr><td class="subcategory">Conj. benefic fixed star</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">+5</td></tr>
+<tr><td class="subcategory">Conj. malefic fixed star</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="pts-col">−5</td></tr>
+
+<!-- SUBTOTALS -->
+<tr class="subtotal-row"><td class="category">Accidental Subtotal</td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td></td></tr>
+
+<!-- GRAND TOTAL -->
+<tr class="grand-total"><td class="category" style="color:var(--gold)">GRAND TOTAL</td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td class="fill-total"></td><td></td></tr>
+
+</tbody>
+</table>
+
+<!-- QUICK REFERENCE -->
+<div class="reference">
+  <h3>Quick Reference</h3>
+
+  <div class="ref-section">
+    <div class="ref-title">House Scores</div>
+    <div class="ref-grid">
+      <span>H1, H10: <span class="val">+5</span></span>
+      <span>H7, H4, H11: <span class="val">+4</span></span>
+      <span>H5, H2: <span class="val">+3</span></span>
+      <span>H9: <span class="val">+2</span></span>
+      <span>H3: <span class="val">+1</span></span>
+      <span>H6: <span class="val">−3</span></span>
+      <span>H8: <span class="val">−4</span></span>
+      <span>H12: <span class="val">−5</span></span>
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">House Joys</div>
+    <div class="ref-grid">
+      <span>☿ → H1</span><span>☽ → H3</span>
+      <span>♀ → H5</span><span>♂ → H6</span>
+      <span>☉ → H9</span><span>♃ → H11</span>
+      <span>♄ → H12</span><span></span>
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Sign Joys</div>
+    <div class="ref-grid">
+      <span>☉ → Leo</span><span>☽ → Cancer</span>
+      <span>☿ → Virgo</span><span>♀ → Taurus</span>
+      <span>♂ → Scorpio</span><span>♃ → Sagittarius</span>
+      <span>♄ → Aquarius</span><span></span>
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Sun Relationship (not cumulative)</div>
+    <div class="ref-grid">
+      <span>Cazimi (≤0°17'): <span class="val">+5</span></span>
+      <span>Combust (≤~8°): <span class="val">−6</span></span>
+      <span>Under beams (≤~17°): <span class="val">−4</span></span>
+      <span>Free (>17°): <span class="val">+5</span></span>
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Orientality</div>
+    <div class="ref-grid">
+      <span>Superior (♄ ♃ ♂) oriental: <span class="val">+2</span></span>
+      <span>Superior occidental: <span class="val">−2</span></span>
+      <span>Inferior (☽ ♀; ☿?) occidental: <span class="val">+2</span></span>
+      <span>Inferior oriental: <span class="val">−2</span></span>
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Hayz Conditions</div>
+    <div class="ref-grid">
+      <span>Diurnal planet: day + above horizon + masculine sign → <span class="val">+3</span></span>
+      <span>Nocturnal planet: night + below horizon + feminine sign → <span class="val">+3</span></span>
+      <span>Fully contrary → <span class="val">−2</span></span>
+      <span>Mixed conditions → <span class="val">0</span></span>
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Triplicity Rulers (Dorothean)</div>
+    <div class="ref-grid">
+      <span>Fire: Day ☉ / Night ♃ / Part. ♄</span>
+      <span>Earth: Day ♀ / Night ☽ / Part. ♂</span>
+      <span>Air: Day ♄ / Night ☿ / Part. ♃</span>
+      <span>Water: Day ♀ / Night ♂ / Part. ☽</span>
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Major Benefic Fixed Stars (precess for epoch)</div>
+    <div class="ref-grid">
+      <span>Regulus · Spica · Sirius · Rigel</span>
+      <span>Vega · Fomalhaut · Achernar · Agena</span>
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Major Malefic Fixed Stars</div>
+    <div class="ref-grid">
+      <span>Algol · Antares · Markab · Alphard</span>
+      <span>Hamal · Zosma · Denebola · Sabik</span>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
