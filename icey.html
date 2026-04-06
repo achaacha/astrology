@@ -20,6 +20,7 @@
   --pos: #7ab87a;
   --neg: #c47a6e;
   --alt: #7a9ec4;
+  --den: #c4a87a;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -109,6 +110,7 @@ header .subtitle {
 }
 .legend .swatch.caz { background: var(--pos); }
 .legend .swatch.com { background: var(--alt); }
+.legend .swatch.den { background: var(--neg); opacity: 0.7; }
 
 /* ── Table ── */
 .scoring-table {
@@ -234,6 +236,16 @@ td.s.dual {
 td.s.dual .caz { color: var(--pos); }
 td.s.dual .com { color: var(--alt); }
 td.s.dual .sep { color: var(--text-dim); font-size: 0.8rem; }
+
+/* Denebola dual cell */
+td.s.den-dual {
+  line-height: 1.3;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  background: rgba(255,255,255,0.02);
+}
+td.s.den-dual .scored { color: var(--neg); }
+td.s.den-dual .unscored { color: var(--text-dim); }
 
 td.fill-total {
   background: rgba(255,255,255,0.03);
@@ -388,9 +400,10 @@ td.s .note {
   <label>Zodiac: <span class="field">Sidereal · Lahiri (23°55′) · Placidus</span></label>
 </div>
 
-<div class="legend">
-  <span><span class="swatch caz"></span> Moon scored as <strong>cazimi</strong> (+5)</span>
-  <span><span class="swatch com"></span> Moon scored as <strong>combust</strong> (−6)</span>
+<div class="legend" style="flex-wrap:wrap;">
+  <span><span class="swatch caz"></span> Moon as <strong>cazimi</strong> (+5)</span>
+  <span><span class="swatch com"></span> Moon as <strong>combust</strong> (−6)</span>
+  <span><span class="swatch den"></span> Denebola <strong>scored</strong> (−5) / <strong>not scored</strong> (0)</span>
 </div>
 
 <table class="scoring-table">
@@ -801,7 +814,7 @@ td.s .note {
 </tr>
 
 <!-- 2H · Fixed Stars -->
-<tr><td colspan="9" class="sub-section">2H · Fixed Stars (Lahiri 23°55′ · epoch 2004)</td></tr>
+<tr><td colspan="9" class="sub-section">2H · Fixed Stars (Lahiri 23°55′ · epoch 2004 · see note on ecliptic latitude)</td></tr>
 
 <tr>
   <td class="subcategory">Conj. benefic fixed star</td>
@@ -815,14 +828,14 @@ td.s .note {
   <td class="pts-col">+5</td>
 </tr>
 
-<!-- Denebola at sidereal ♌ 27°44′ (trop. 21°39′ ♍ − 23°55′ ayanamsa) -->
+<!-- Denebola at sidereal ♌ 27°44′ — ecliptic longitude alignment but ~12° ecliptic latitude separation. Dual scored: −5 if longitude-projected, 0 if observational/spatial. -->
 <tr>
   <td class="subcategory">Conj. malefic fixed star</td>
-  <td class="s neg">−5<span class="note">Denebola 0°29′</span></td>
-  <td class="s neg">−5<span class="note">Denebola 0°59′</span></td>
+  <td class="s den-dual"><span class="scored">−5</span> <span style="color:var(--text-dim);font-size:0.8rem">/</span> <span class="unscored">0</span><span class="note">Denebola 0°29′ ecl.lon.</span></td>
+  <td class="s den-dual"><span class="scored">−5</span> <span style="color:var(--text-dim);font-size:0.8rem">/</span> <span class="unscored">0</span><span class="note">Denebola 0°59′ ecl.lon.</span></td>
   <td class="s zero">—</td>
   <td class="s zero">—</td>
-  <td class="s neg">−5<span class="note">Denebola 0°47′</span></td>
+  <td class="s den-dual"><span class="scored">−5</span> <span style="color:var(--text-dim);font-size:0.8rem">/</span> <span class="unscored">0</span><span class="note">Denebola 0°47′ ecl.lon.</span></td>
   <td class="s zero">—</td>
   <td class="s zero">—</td>
   <td class="pts-col">−5</td>
@@ -831,15 +844,15 @@ td.s .note {
 <!-- ═══════════════════════════════════════════ -->
 <!-- ACCIDENTAL SUBTOTAL                        -->
 <!-- ═══════════════════════════════════════════ -->
-<!-- Moon cazimi acc: +3+0+5+1+2-2+5-5+0-2+0+0+0+0-2+0+0-5 = 0 -->
-<!-- Moon combust acc: +3+0-6+1+2-2+5-5+0-2+0+0+0+0-2+0+0-5 = -11 -->
+<!-- Accidental subtotals: shown WITHOUT Denebola / WITH Denebola -->
+<!-- Sun: +6/+1  Moon caz: +5/0  Moon com: -6/-11  Mars: +16/+11 -->
 <tr class="subtotal-row">
   <td class="category">Accidental Subtotal</td>
-  <td class="fill-total pos">+1</td>
-  <td class="fill-total dual-total"><span style="color:var(--pos)">0</span> <span style="color:var(--text-dim)">/</span> <span style="color:var(--alt)">−11</span></td>
+  <td class="fill-total dual-total"><span style="color:var(--pos)">+6</span> <span style="color:var(--text-dim)">/</span> <span style="color:var(--pos)">+1</span></td>
+  <td class="fill-total dual-total"><span style="color:var(--pos)">+5</span><span style="color:var(--text-dim)">/</span><span style="color:var(--text-dim)">0</span><br><span style="color:var(--alt)">−6</span><span style="color:var(--text-dim)">/</span><span style="color:var(--alt)">−11</span></td>
   <td class="fill-total zero">0</td>
   <td class="fill-total pos">+9</td>
-  <td class="fill-total pos">+11</td>
+  <td class="fill-total dual-total"><span style="color:var(--pos)">+16</span> <span style="color:var(--text-dim)">/</span> <span style="color:var(--pos)">+11</span></td>
   <td class="fill-total neg">−7</td>
   <td class="fill-total pos">+16</td>
   <td></td>
@@ -848,15 +861,14 @@ td.s .note {
 <!-- ═══════════════════════════════════════════ -->
 <!-- GRAND TOTAL                                -->
 <!-- ═══════════════════════════════════════════ -->
-<!-- Moon cazimi grand: -5 + 0 = -5 -->
-<!-- Moon combust grand: -5 + (-11) = -16 -->
+<!-- Sun: +11/+6  Moon caz: 0/-5  Moon com: -11/-16  Mars: +19/+14 -->
 <tr class="grand-total">
   <td class="category" style="color:var(--gold)">GRAND TOTAL</td>
-  <td class="fill-total pos">+6</td>
-  <td class="fill-total dual-total"><span style="color:var(--pos)">−5</span> <span style="color:var(--text-dim)">/</span> <span style="color:var(--alt)">−16</span></td>
+  <td class="fill-total dual-total"><span style="color:var(--pos)">+11</span> <span style="color:var(--text-dim)">/</span> <span style="color:var(--pos)">+6</span></td>
+  <td class="fill-total dual-total"><span style="color:var(--pos)">0</span><span style="color:var(--text-dim)">/</span><span style="color:var(--neg)">−5</span><br><span style="color:var(--alt)">−11</span><span style="color:var(--text-dim)">/</span><span style="color:var(--alt)">−16</span></td>
   <td class="fill-total neg">−5</td>
   <td class="fill-total pos">+4</td>
-  <td class="fill-total pos">+14</td>
+  <td class="fill-total dual-total"><span style="color:var(--pos)">+19</span> <span style="color:var(--text-dim)">/</span> <span style="color:var(--pos)">+14</span></td>
   <td class="fill-total neg">−17</td>
   <td class="fill-total pos">+6</td>
   <td></td>
@@ -872,26 +884,30 @@ td.s .note {
   <h3>Interpretive Summary</h3>
 
   <div class="rank-list">
-    <span class="pos">1. ♂ Mars &nbsp;&nbsp;+14</span> &nbsp;(ess. +3 · acc. +11)<br>
-    <span class="pos">2. ☉ Sun &nbsp;&nbsp;&nbsp;+6</span> &nbsp;&nbsp;(ess. +5 · acc. +1)<br>
-    <span class="pos">3. ♄ Saturn &nbsp;+6</span> &nbsp;&nbsp;(ess. −10 · acc. +16)<br>
-    <span class="pos">4. ♀ Venus &nbsp;+4</span> &nbsp;&nbsp;(ess. −5 · acc. +9)<br>
-    <span class="neg">5. ☿ Mercury −5</span> &nbsp;(ess. −5 · acc. 0)<br>
-    <span class="pos">6. ☽ Moon &nbsp;&nbsp;−5</span> &nbsp;(ess. −5 · acc. 0) &nbsp;<span class="alt">or −16</span> <span class="alt">(ess. −5 · acc. −11)</span><br>
-    <span class="neg">7. ♃ Jupiter −17</span> (ess. −10 · acc. −7)<br>
+    <span class="pos">1. ♂ Mars &nbsp;&nbsp;+19 / +14</span><br>
+    <span class="pos">2. ☉ Sun &nbsp;&nbsp;&nbsp;+11 / +6</span><br>
+    <span class="pos">3. ♄ Saturn &nbsp;+6</span><br>
+    <span class="pos">4. ♀ Venus &nbsp;+4</span><br>
+    <span class="pos">5. ☽ Moon &nbsp;&nbsp;&nbsp;0 to −5</span> <span style="color:var(--text-dim)">(cazimi)</span> &nbsp;<span class="alt">−11 to −16</span> <span style="color:var(--text-dim)">(combust)</span><br>
+    <span class="neg">6. ☿ Mercury −5</span><br>
+    <span class="neg">7. ♃ Jupiter −17</span><br>
   </div>
 
-  <p><strong>The Moon's score depends entirely on whether the 0°30′ separation is read as cazimi or combust.</strong> At cazimi (+5), the Moon scores −5 overall — weak but not catastrophic, held afloat by the Jupiter conjunction, increasing light, and occidental advantage. At combust (−6), the Moon collapses to −16, making it nearly as debilitated as Jupiter and second-weakest in the chart. The 11-point swing between these two readings is the single largest interpretive variable in the entire table. The difference is not academic: it determines whether the native's emotional life is empowered-but-constrained or genuinely impaired.</p>
+  <p>Ranges reflect Denebola scored (−5) or not scored (0). Denebola at sidereal ♌ 27°44′ aligns in ecliptic longitude with the cazimi cluster (Sun 0°29′, Mars 0°47′, Moon 0°59′) but sits ~12° north in ecliptic latitude — not a physical conjunction. In a Placidus framework that privileges real spatial geometry, the longitude-only projection is inconsistent with the house system's philosophy. Both options are preserved for the astrologer's judgment.</p>
 
-  <p><strong>Mars (+14) leads the chart decisively</strong> — cazimi, fast (0°39′/day, 126% of mean), direct, conjunct Jupiter, with term and face in Leo. Denebola (−5) cuts into the total but Mars's diverse accidental strengths absorb the blow. As lord of the Ascendant in a night chart, Mars is both the native's primary instrument and the planet most likely to cause harm through its own excess.</p>
+  <p><strong>The chart has two major interpretive variables:</strong> the Moon's cazimi/combust status and the Denebola question. Together they create a range for the Moon from 0 (cazimi, no Denebola — a Moon that breaks even) to −16 (combust with Denebola — a Moon nearly as debilitated as Jupiter). The Sun and Mars shift by 5 points depending on the Denebola decision, which affects whether Mars is dominant by a commanding margin (+19) or a strong one (+14), and whether the Sun competes with Saturn for second place (+11) or ties it (+6).</p>
 
-  <p><strong>The Sun (+6) and Saturn (+6) tie for second</strong> from opposite foundations. The Sun's strength is almost entirely essential — domicile in Leo (+5) with thin accidental support (+1), as the benefic and malefic conjunctions cancel and Denebola erodes the sign joy. Saturn's strength is entirely accidental (+16) — free from the Sun, oriental, fast (0°05′/day, ~2.5× mean), direct, sextile Jupiter — built on top of essential ruin (detriment and peregrine, −10). The Sun knows what it is but can't always act; Saturn acts constantly but doesn't know what it's doing.</p>
+  <p><strong>Mars leads the chart in all scenarios</strong> — cazimi, fast (0°39'/day, 126% of mean), direct, conjunct Jupiter, with term and face in Leo. At +19 without Denebola, Mars is dominant by a wide margin. At +14 with Denebola, Mars still leads decisively. As lord of the Ascendant in a night chart, Mars is both the native's primary instrument and the planet most likely to cause harm through its own excess.</p>
 
-  <p><strong>Venus (+4)</strong> is the chart's emotional anchor — angular in H4, free from the Sun, in full hayz — but slower than her mean (1°06′ vs. 1°12′) and void of course. She delivers warmth and domestic stability but with limited follow-through. As ruler of the 7th, partnerships begin with genuine feeling but may stall before completion.</p>
+  <p><strong>The Sun</strong> ranges from +11 (without Denebola) to +6 (with). At +11, the Sun is a genuinely strong planet — domicile dignity (+5) with meaningful accidental support (+6), second only to Mars. At +6, the Sun ties Saturn, its strength more essential than accidental. Either way, the Sun is the most qualitatively competent planet in the chart.</p>
 
-  <p><strong>Jupiter (−17) remains the weakest planet.</strong> In detriment, peregrine, combust, conjunct Mars, occidental, and contrary to hayz. The fast speed (+2) is the only bright spot, and it merely means Jupiter rushes ineffectively through a sign that rejects it.</p>
+  <p><strong>Saturn (+6)</strong> is unchanged by Denebola. Its strength is entirely accidental (+16) — free from the Sun, oriental, fast (0°05'/day, ~2.5x mean), direct, sextile Jupiter — built on top of essential ruin (detriment and peregrine, −10). Saturn acts constantly but performs its own nature poorly.</p>
 
-  <p class="note-block"><strong>Notes on methodology:</strong> Mars is scored as cazimi (0°18′ from the Sun, at the traditional 0°17′ boundary — treated as cazimi given the phenomenological reality of complete solar absorption). Moon at 0°30′ is outside the strict cazimi orb; both cazimi and combust interpretations are presented in parallel throughout the table. Denebola is placed at sidereal ♌ 27°44′, derived from tropical 21°39′ Virgo (2004 epoch) minus Lahiri ayanamsa 23°55′. Separations: Sun 0°29′, Mars 0°47′, Moon 0°59′ — all within standard 1° fixed-star orb. Velocity derived from Astro-Seek Lahiri ephemeris, Sep 13–14 2004 daily position differences.</p>
+  <p><strong>Venus (+4)</strong> is the chart's emotional anchor — angular in H4, free from the Sun, in full hayz — but slower than her mean (1°06' vs. 1°12') and void of course. She delivers warmth and domestic stability but with limited follow-through.</p>
+
+  <p><strong>Jupiter (−17) remains the weakest planet in all scenarios.</strong> In detriment, peregrine, combust, conjunct Mars, occidental, and contrary to hayz. The fast speed (+2) is the only bright spot.</p>
+
+  <p class="note-block"><strong>Notes on methodology:</strong> Mars is scored as cazimi (0°18' from the Sun, at the traditional 0°17' boundary — treated as cazimi given the phenomenological reality of complete solar absorption). Moon at 0°30' is outside the strict cazimi orb; both cazimi and combust interpretations are presented. Denebola is dual-scored: ecliptic longitude alignment is within standard 1° orb, but ~12° ecliptic latitude separation means no physical conjunction exists in the observable sky (confirmed via Stellarium). In a Placidus framework, spatial geometry takes precedence over projection. Both options are shown for transparency. Velocity derived from Astro-Seek Lahiri ephemeris, Sep 13-14 2004 daily position differences. Lahiri ayanamsa at epoch: 23°55'.</p>
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
